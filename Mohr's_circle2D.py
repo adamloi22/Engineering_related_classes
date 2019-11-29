@@ -40,16 +40,26 @@ class Mohr2D:
 		return principle_stresses
 
 	def get_principle_directions(self):
-		#principle directions: how much angle clockwise to get no shear stresses in degrees
-		direction1 = 0.5*np.arctan(self.tauxy/(self.sigmaxx - self.centre))*(180/(2*np.pi))
+		#principle directions: directions where there will be no shear stress
+		#returns directions in the form of angles in degrees from axis xx or yy clockwise 
+		direction1 = 0
+		direction2 = 0
+		if (self.sigmaxx - self.centre) != 0:
+			direction1 = 0.5*np.arctan(self.tauxy/(self.sigmaxx - self.centre))*(180/(2*np.pi))
+		elif self.tauxy > 0:
+			direction1 = 90
+		elif self.tauxy > 0:
+			direction1 = -90
+
 		if direction1 > 0:
 			direction2 = direction1 - 90
-		if direction1 < 0:
+		elif direction1 < 0:
 			direction2 = direction1 + 90
+
 		principle_directions = [direction1, direction2]
 		return principle_directions
 
 mohr = Mohr2D(10, 20, 10)
-print(mohr.get_principle_stresses())
-print(mohr.get_principle_directions())
+print("Principle stresses: {}".format(mohr.get_principle_stresses()))
+print("Principle directions: {}".format(mohr.get_principle_directions()))
 mohr.plot()

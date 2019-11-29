@@ -6,7 +6,7 @@ A class for vectors.
 """
 
 class vec:
-	def __init__(self, *components):
+	def __init__(self, components):
 		#components is a list of values of the vector
 		self.components = components
 		self.dimensions = len(components)
@@ -20,11 +20,11 @@ class vec:
 
 	def __add__(self, other):
 		assert self.dimensions == other.dimensions
-		return [i + j for i, j in zip(self.components, other.components)]
+		return vec([i + j for i, j in zip(self.components, other.components)])
 
 	def __sub__(self, other):
 		assert self.dimensions == other.dimensions
-		return [i - j for i, j in zip(self.components, other.components)]
+		return vec([i - j for i, j in zip(self.components, other.components)])
 
 	def dot(self, other):
 		#dot produc between any dimension of vectors
@@ -42,7 +42,7 @@ class vec:
 		x_new = y_self*z_other - z_self*y_other
 		y_new = z_self*x_other - x_self*z_other
 		z_new = x_self*y_other - y_self*x_other
-		return vec(x_new, y_new, z_new)
+		return vec([x_new, y_new, z_new])
 
 	def cart_to_cyl(self):
 		#Converts cartesian coordinates to cylindrcal polar coordinates
@@ -78,10 +78,10 @@ class vec:
 		if self.dimensions == 2:
 			return [r, theta]
 		else:
-			return [r, theta, self.components[2]]
+			return vec([r, theta, self.components[2]])
 
-v1 = vec(-1, 2, 3)
-v2 = vec(2, 3, 4)
+v1 = vec([-1, 2, 3])
+v2 = vec([2, 3, 4])
 
 print(v1)
 print(v1 + v2)

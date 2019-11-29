@@ -1,8 +1,15 @@
 import numpy as np 
 import matplotlib.pyplot as plt
 
+"""
+Create and interpret a 2D Mohr's cicle.
+"""
+
 class Mohr2D:
 	def __init__(self, sigmaxx, sigmayy, tauxy):
+		#sigmaxx - normal stress in xx direction
+		#sigmayy - normal stress in yy direction
+		#tauxy - shear stress in xy direction
 		self.sigmaxx = sigmaxx
 		self.sigmayy = sigmayy
 		self.tauxy = tauxy
@@ -10,6 +17,7 @@ class Mohr2D:
 		self.radius = ((sigmaxx - self.centre)**2 + tauxy**2)**0.5
 
 	def plot(self):
+		#plots Mohr's circle and datapoints entered
 		theta_list = np.arange(0, 2*np.pi, 0.001)
 		cart_vec = []
 		r = self.radius
@@ -27,6 +35,7 @@ class Mohr2D:
 		plt.show()
 
 	def get_principle_stresses(self):
+		#returns the principle stresses (normal stresses when there are no shear stresses)
 		principle_stresses = [self.centre + self.radius, self.centre - self.radius]
 		return principle_stresses
 

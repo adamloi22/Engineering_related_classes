@@ -7,7 +7,7 @@ A class for vector fields.
 """
 
 class vec_field:
-	def __init__(self, *f):
+	def __init__(self, f):
 		#f is a set of lambda functions representing the components of the vector field
 		self.components = f
 		self.dimensions = len(f)
@@ -131,8 +131,8 @@ fx3D = lambda x, y, z : x*y + 2*x*z
 fy3D = lambda x, y, z : z*x**2 + 2*y*z
 fz3D = lambda x, y, z : x**3 + 2*(x**2)*(y**2)*z
 
-field2D = vec_field(fx2D, fy2D)
-field3D = vec_field(fx3D, fy3D, fz3D)
+field2D = vec_field((fx2D, fy2D))
+field3D = vec_field((fx3D, fy3D, fz3D))
 
 x, y, z = (2, 3, 1)
 
